@@ -1,0 +1,39 @@
+name: Agent task
+description: AI に渡す仕事の単位。完了条件を機械判定できる形で書く
+labels: ["agent"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: 何が達成されればよいか。手順ではなく状態で書く
+      placeholder: モック HTML と現在の画面実装を一致させる
+    validations: { required: true }
+  - type: textarea
+    id: done
+    attributes:
+      label: Done
+      description: 機械で判定できる条件だけ。「いい感じ」「きれいに」は書かない
+      placeholder: |
+        - [ ] 主要3画面の VRT 差分が 0
+        - [ ] ./scripts/check.sh が通る
+        - [ ] 新規の console error がない
+    validations: { required: true }
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+      description: やってはいけないこと
+      placeholder: |
+        - API の変更は禁止
+        - モック側は変更しない
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: 気づいても今回は触らないもの（見つけたら別 Issue にする）
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: AGENTS.md に書いていない、この Issue だけの特殊事情。なければ空でよい

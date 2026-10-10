@@ -1,0 +1,20 @@
+name: check
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  check:
+    # テンプレート自体には評価対象のコードがない（STEPS 未設定なので check.sh は意図的に FAIL する）。
+    # テンプレートから作ったリポジトリでだけ走らせる。
+    if: ${{ !github.event.repository.is_template }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # TODO: 言語ランタイムのセットアップを足す（例: astral-sh/setup-uv, actions/setup-node）
+      - run: ./scripts/check.sh
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: check-log
+          path: .agent/check.log

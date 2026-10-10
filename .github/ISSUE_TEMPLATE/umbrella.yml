@@ -1,0 +1,25 @@
+name: Umbrella
+description: /explore の結果など、複数の子タスクを束ねる親 Issue
+labels: ["umbrella"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+    validations: { required: true }
+  - type: textarea
+    id: findings
+    attributes:
+      label: Findings
+      description: 1件 = 1 PR の粒度。各項目に機械判定できる Done を付ける
+      placeholder: "- [ ] <子タスク> — Done: <条件> — 根拠: <ファイル:行>"
+    validations: { required: true }
+  - type: textarea
+    id: needs-eval
+    attributes:
+      label: Needs evaluation first
+      description: Done を機械判定にできなかったもの。先に評価指標を作るのは人間の仕事
+  - type: textarea
+    id: order
+    attributes:
+      label: Order
