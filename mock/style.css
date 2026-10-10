@@ -1,0 +1,26 @@
+:root { --ink:#1f2328; --muted:#656d76; --line:#d0d7de; --bg:#f6f8fa; --accent:#0969da; --ok:#1a7f37; --warn:#9a6700; --ng:#cf222e; }
+* { box-sizing:border-box; }
+body { margin:0; font-family: "WenQuanYi Zen Hei", sans-serif; color:var(--ink); background:#fff; font-size:14px; line-height:1.6; }
+header { display:flex; align-items:center; justify-content:space-between; padding:12px 24px; border-bottom:1px solid var(--line); background:var(--bg); }
+header .brand { font-weight:bold; font-size:16px; }
+header nav a { margin-left:16px; color:var(--accent); text-decoration:none; }
+main { max-width:960px; margin:24px auto; padding:0 24px; }
+h1 { font-size:20px; margin:0 0 16px; }
+.toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.btn { display:inline-block; padding:6px 14px; border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--ink); text-decoration:none; font-size:14px; }
+.btn.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+table { width:100%; border-collapse:collapse; }
+th, td { text-align:left; padding:8px 12px; border-bottom:1px solid var(--line); }
+th { background:var(--bg); font-weight:bold; color:var(--muted); font-size:12px; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+.badge { display:inline-block; padding:0 8px; border-radius:10px; font-size:12px; border:1px solid currentColor; }
+.badge.active { color:var(--ok); } .badge.paused { color:var(--warn); } .badge.closed { color:var(--muted); }
+dl { display:grid; grid-template-columns:160px 1fr; gap:8px 16px; margin:0 0 24px; }
+dt { color:var(--muted); } dd { margin:0; }
+.card { border:1px solid var(--line); border-radius:8px; padding:16px 20px; margin-bottom:16px; }
+.card h2 { font-size:15px; margin:0 0 12px; }
+form .field { margin-bottom:14px; }
+form label { display:block; font-weight:bold; margin-bottom:4px; }
+form input, form select, form textarea { width:100%; padding:6px 10px; border:1px solid var(--line); border-radius:6px; font:inherit; }
+form .hint { color:var(--muted); font-size:12px; }
+form .actions { display:flex; gap:8px; justify-content:flex-end; }

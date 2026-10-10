@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><title>新規登録 | 案件管理</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header><span class="brand">案件管理</span><nav><a href="list.html">案件一覧</a><a href="new.html">新規登録</a></nav></header>
+<main>
+<div class="toolbar"><h1>新規登録</h1></div>
+<form class="card" method="post" action="#">
+<div class="field"><label for="name">案件名</label><input id="name" name="name" required></div>
+<div class="field"><label for="client">顧客</label><input id="client" name="client" required></div>
+<div class="field"><label for="status">状態</label>
+<select id="status" name="status"><option value="active">進行中</option><option value="paused">保留</option><option value="closed">完了</option></select></div>
+<div class="field"><label for="budget">予算（円）</label><input id="budget" name="budget" inputmode="numeric"><div class="hint">税抜・整数で入力</div></div>
+<div class="field"><label for="start">開始日</label><input id="start" name="start" type="date"></div>
+<div class="field"><label for="end">終了日</label><input id="end" name="end" type="date"></div>
+<div class="actions"><a class="btn" href="list.html">キャンセル</a><button class="btn primary" type="submit">登録</button></div>
+</form>
+</main>
+</body></html>

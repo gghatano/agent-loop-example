@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><title>案件一覧</title></head>
+<body>
+<h1>案件一覧</h1>
+<ul>
+{% for p in projects %}<li><a href="/projects/{{ p.id }}">{{ p.name }}</a> ({{ p.client }})</li>{% endfor %}
+</ul>
+</body></html>

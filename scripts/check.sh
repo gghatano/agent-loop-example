@@ -7,11 +7,12 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
+BASE=$(git rev-parse -q --verify origin/main || git rev-parse HEAD)
 STEPS=(
-  # "lint|uv run ruff check ."
-  # "type|uv run mypy src"
-  # "test|uv run pytest -q"
-  # "vrt|pnpm vrt"            # 見た目の差分 0 を完了条件にするなら
+  "lint|uv run ruff check ."
+  "test|uv run pytest -q"
+  "mock-unchanged|git diff --exit-code --stat $BASE -- mock/ fixtures/"
+  "vrt|uv run python scripts/vrt.py"
 )
 
 if [ ${#STEPS[@]} -eq 0 ]; then

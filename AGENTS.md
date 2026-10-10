@@ -5,10 +5,8 @@
 1行足すときは、`docs/failures.md` の該当行を根拠として残す。
 
 ## Project rules
-<!-- TODO: 例を消して自分の制約に置き換える -->
-- TODO: 例) 既存の公開 API のシグネチャを壊さない
-- TODO: 例) 新規依存を追加するときは PR 本文に理由を書く
-- TODO: 例) API を変えたら `openapi.yaml` も更新する
+- `mock/` はデザインの正。実装をモックに合わせる。`mock/` と `fixtures/` は変更しない
+- 画面に出すデータは `fixtures/projects.json` から描画する。テンプレートに値を直書きしない
 
 ## Completion criteria
 タスクは次をすべて満たしたときだけ完了とする。満たせないまま完了と報告しない。
@@ -24,7 +22,7 @@
 - Issue の `Done` が曖昧で、2通り以上の解釈がある
 
 ## Where things are
-- 評価: `scripts/check.sh`（AI・hook・CI 共通）
+- 評価: `scripts/check.sh`（AI・hook・CI 共通）。画面差分は `scripts/vrt.py`、差分画像は `.agent/vrt/*.diff.png`
 - 作業メモ: `tasks/current.md`（使い捨て。正は Issue）
 - 失敗ログ: `docs/failures.md`
 - 判断の記録: `docs/decisions.md`

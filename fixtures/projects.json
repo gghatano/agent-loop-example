@@ -1,0 +1,8 @@
+[
+  {"id": 101, "name": "基幹システム刷新", "client": "北洋物産株式会社", "status": "active", "owner": "佐藤", "budget": 48000000, "start": "2026-04-01", "end": "2027-03-31",
+   "description": "受発注・在庫管理の基幹システムをクラウドへ移行する。", "members": ["佐藤", "高橋", "伊藤"]},
+  {"id": 102, "name": "需要予測PoC", "client": "南星フーズ", "status": "paused", "owner": "鈴木", "budget": 6500000, "start": "2026-07-15", "end": "2026-12-25",
+   "description": "店舗別の日次需要を予測するモデルの実証。", "members": ["鈴木", "渡辺"]},
+  {"id": 103, "name": "営業ダッシュボード", "client": "東和精機", "status": "closed", "owner": "田中", "budget": 3200000, "start": "2025-10-01", "end": "2026-03-31",
+   "description": "営業 KPI の可視化ダッシュボード構築。", "members": ["田中"]}
+]
