@@ -19,11 +19,16 @@ rm -f .agent/BLOCKED
 
 # ヘッドレス実行では、未信頼ワークスペースだと settings.json の allow が無視される。
 # ループが AI に渡す権限はここで明示する（docs/failures.md 2026-10-10 #1）。
+# 許可はコマンド単位で前方一致する。AI は `git -C . add` や `... | tail` のように書くので、
+# 細かく列挙すると正しい作業が承認待ちで止まる（docs/failures.md 2026-10-10 #1 run 2）。
+# 道具単位で広く許し、取り返しのつかない操作だけを DENIED で塞ぐ。
 ALLOWED=(
-  "Bash(./scripts/check.sh)"
-  "Bash(uv run:*)" "Bash(uv sync:*)"
-  "Bash(git status:*)" "Bash(git diff:*)" "Bash(git log:*)"
-  "Bash(git switch:*)" "Bash(git checkout -b:*)" "Bash(git add:*)" "Bash(git commit:*)"
+  "Bash(./scripts/check.sh:*)" "Bash(uv:*)" "Bash(git:*)"
+  "Bash(cat:*)" "Bash(head:*)" "Bash(tail:*)" "Bash(ls:*)" "Bash(grep:*)" "Bash(find:*)" "Bash(wc:*)"
+)
+DENIED=(
+  "Bash(git push --force:*)" "Bash(git push -f:*)" "Bash(git reset --hard:*)" "Bash(git clean:*)"
+  "Read(./.env)" "Read(./.env.*)"
 )
 
 # Issue 本文は人間側で取ってきて渡す。AI に gh の認証を持たせない。
@@ -52,7 +57,7 @@ for i in $(seq 1 "$MAX_ITER"); do
   echo "== iteration $i/$MAX_ITER ($ts)"
   before=$(fingerprint)
   claude -p "$GOAL" --append-system-prompt "$NOTE" \
-    --permission-mode acceptEdits --allowedTools "${ALLOWED[@]}" \
+    --permission-mode acceptEdits --allowedTools "${ALLOWED[@]}" --disallowedTools "${DENIED[@]}" \
     > ".agent/logs/$ts.md" 2>&1
 
   if ./scripts/check.sh > ".agent/logs/$ts.check" 2>&1; then
