@@ -7,7 +7,7 @@ argument-hint: <#issue番号>
 `$ARGUMENTS` の Issue を目標として、完了条件を満たすまで自走する。
 
 ## 手順
-1. `gh issue view $ARGUMENTS` で Goal / Done / Constraints / Out of scope を読む。
+1. Issue の Goal / Done / Constraints / Out of scope を読む。`tasks/issue-<番号>.md` があればそれを、なければ `gh issue view <番号>` を使う。
    Done が機械判定できない・解釈が2通り以上あるなら、ここで止めて質問する。
 2. `tasks/current.md` に Issue 番号と Done のチェックリストを書く。
 3. 作業ブランチを切る（`agent/<issue番号>-<短い名前>`）。

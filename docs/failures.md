@@ -15,3 +15,4 @@ AI が失敗したら、原因を**1つだけ**選んで1行追記する（`/pos
 | 日付 | Issue | 分類 | 何が起きたか（1行） | → 昇格先 |
 |---|---|---|---|---|
 | YYYY-MM-DD | #0 | Context | 例) 金額を float で扱った。このプロジェクトは整数円 | AGENTS.md#Project rules |
+| 2026-10-10 | #1 | Permission | headless `claude -p` が未信頼ワークスペース扱いで settings.json の allow を無視し、`gh issue view` が承認待ち→Issue を読めず3周とも無変更で停止（check の vrt=FAIL は着手前のベースライン） | scripts/loop.sh（--allowedTools を明示、Issue 本文は人間側で取得して tasks/issue-N.md で渡す、BLOCKED / 無変化で停止） |
