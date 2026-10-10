@@ -19,7 +19,7 @@
 <table>
 <thead><tr><th>#</th><th>氏名</th><th>役割</th></tr></thead>
 <tbody>
-{% for m in project.members %}<tr><td>{{ loop.index }}</td><td>{{ m }}</td><td>{{ "担当" if m == project.owner else "メンバー" }}</td></tr>
+{% for m in project.members %}<tr><td>{{ loop.index }}</td><td>{{ m }}</td><td>{{ member_role(m, project.owner) }}</td></tr>
 {% endfor %}</tbody>
 </table>
 </div>
