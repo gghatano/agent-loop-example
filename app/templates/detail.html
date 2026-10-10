@@ -1,6 +1,26 @@
-<!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><title>{{ project.name }}</title></head>
-<body>
-<h1>{{ project.name }}</h1>
+{% extends "base.html" %}
+{% block title %}{{ project.name }}{% endblock %}
+{% block content %}
+<div class="toolbar"><h1>{{ project.name }}</h1><a class="btn" href="/projects">一覧へ戻る</a></div>
+<div class="card">
+<h2>概要</h2>
+<dl>
+<dt>案件ID</dt><dd>{{ project.id }}</dd>
+<dt>顧客</dt><dd>{{ project.client }}</dd>
+<dt>状態</dt><dd><span class="badge {{ project.status }}">{{ project.status | status_label }}</span></dd>
+<dt>担当</dt><dd>{{ project.owner }}</dd>
+<dt>予算</dt><dd>{{ project.budget | yen }}</dd>
+<dt>期間</dt><dd>{{ project | period }}（{{ project | days }}日）</dd>
+</dl>
 <p>{{ project.description }}</p>
-</body></html>
+</div>
+<div class="card">
+<h2>メンバー（{{ project.members | length }}名）</h2>
+<table>
+<thead><tr><th>#</th><th>氏名</th><th>役割</th></tr></thead>
+<tbody>
+{% for m in project.members %}<tr><td>{{ loop.index }}</td><td>{{ m }}</td><td>{{ "担当" if m == project.owner else "メンバー" }}</td></tr>
+{% endfor %}</tbody>
+</table>
+</div>
+{% endblock %}
