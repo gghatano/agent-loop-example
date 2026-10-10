@@ -65,5 +65,7 @@ def test_new_form_controls(page, base_url):
 def test_unknown_project_returns_404(page, base_url):
     res = page.goto(f"{base_url}/projects/999")
     assert res.status == 404
-    # 404 のリソース読み込みはブラウザが console error として出すので、このテストでは除外する
-    page.console_errors[:] = [e for e in page.console_errors if not re.search(r"404", e)]
+    # 文書そのものの 404 は、ブラウザが console error を1件だけ出す。それ以外のエラーは残して検出する
+    doc_404 = [e for e in page.console_errors if re.search(r"status of 404", e)]
+    assert len(doc_404) == 1, page.console_errors
+    page.console_errors.remove(doc_404[0])

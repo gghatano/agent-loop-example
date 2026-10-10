@@ -67,12 +67,18 @@ def main() -> int:
     )
     failed = False
     try:
-        for _ in range(50):
+        for _ in range(100):
+            if server.poll() is not None:
+                print(f"FAIL uvicorn exited with code {server.returncode}")
+                return 1
             try:
                 socket.create_connection(("127.0.0.1", port), timeout=0.2).close()
                 break
             except OSError:
                 time.sleep(0.1)
+        else:
+            print("FAIL uvicorn did not start within 10s")
+            return 1
         with sync_playwright() as p:
             browser = launch(p)
             for name, path in SCREENS.items():
@@ -90,6 +96,7 @@ def main() -> int:
             browser.close()
     finally:
         server.terminate()
+        server.wait(timeout=10)
     if failed:
         print(f"差分画像: {OUT.relative_to(ROOT)}/<screen>.diff.png（赤 = 不一致）")
     return 1 if failed else 0

@@ -24,6 +24,8 @@ def base_url():
         [sys.executable, "-m", "uvicorn", "app.main:app", "--port", str(port), "--log-level", "warning"], cwd=ROOT
     )
     for _ in range(100):
+        if server.poll() is not None:
+            pytest.fail(f"uvicorn exited with code {server.returncode}")
         try:
             socket.create_connection(("127.0.0.1", port), timeout=0.2).close()
             break
