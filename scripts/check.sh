@@ -10,9 +10,10 @@ cd "$(dirname "$0")/.."
 BASE=$(git rev-parse -q --verify origin/main || git rev-parse HEAD)
 STEPS=(
   "lint|uv run ruff check ."
-  "test|uv run pytest -q"
+  "test|uv run pytest -q --ignore=tests/e2e"
   "mock-unchanged|git diff --exit-code --stat $BASE -- mock/ fixtures/"
   "vrt|uv run python scripts/vrt.py"
+  "e2e|uv run pytest -q tests/e2e"
 )
 
 if [ ${#STEPS[@]} -eq 0 ]; then
