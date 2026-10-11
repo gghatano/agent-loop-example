@@ -16,4 +16,5 @@ AI が失敗したら、原因を**1つだけ**選んで1行追記する（`/pos
 |---|---|---|---|---|
 | YYYY-MM-DD | #0 | Context | 例) 金額を float で扱った。このプロジェクトは整数円 | AGENTS.md#Project rules |
 | 2026-10-10 | #1 | Permission | headless `claude -p` が未信頼ワークスペース扱いで settings.json の allow を無視し、`gh issue view` が承認待ち→Issue を読めず3周とも無変更で停止（check の vrt=FAIL は着手前のベースライン） | scripts/loop.sh（--allowedTools を明示、Issue 本文は人間側で取得して tasks/issue-N.md で渡す、BLOCKED / 無変化で停止） |
+| 2026-10-10 | #1 | Permission | run 2: 実装は1周目で check 緑。だが `git add` が承認待ちになりコミットできず、`.agent/BLOCKED` で正しく停止。許可は前方一致。AI が実際に打った形はログに残っていないが、`git -C . add` が拒否されることは再現で確認した | scripts/loop.sh（道具単位で広く許可し、破壊的操作だけ --disallowedTools で塞ぐ） |
 | 2026-10-10 | #3 | Evaluation | 人間（Claude）が書いた結合テストが一部の項目しか見ておらず、レビュー役のサブエージェントが作った誤実装24個のうち17個が check を通過した（説明文の直書き、XSS、担当の取り違えなど） | tests/test_routes.py（全項目を期待値の表と完全一致で比べる。HTML・未知の状態・同名を含むデータ） |
